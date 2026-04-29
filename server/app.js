@@ -8,13 +8,12 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://ai-code-review-tool-sable.vercel.app"
+      "https://ai-code-review-tool-sable.vercel.app",
     ],
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
   })
 );
-
 
 app.use(express.json());
 
