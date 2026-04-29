@@ -4,13 +4,17 @@ import reviewRoutes from "./routes/reviewRoutes.js";
 
 const app = express();
 
-app.use(cors({
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type"],
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://ai-code-review-tool-sable.vercel.app"
+    ],
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
-app.options("*", cors());
 
 app.use(express.json());
 
