@@ -4,21 +4,18 @@ import reviewRoutes from "./routes/reviewRoutes.js";
 
 const app = express();
 
-// 🔥 IMPORTANT: allow your frontend domain
-app.use(
-  cors({
-    origin: true,
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
+// 🔥 MUST BE FIRST middleware
+app.use(cors());
+
+// handle preflight explicitly
+app.options("*", cors());
 
 app.use(express.json());
 
-// ✅ Correct route
+// routes
 app.use("/api/review", reviewRoutes);
 
-// optional health check
+// health check
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
