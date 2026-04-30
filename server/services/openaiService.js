@@ -26,6 +26,7 @@ export const getAIReview = async (code) => {
     );
 
     return response.data.choices[0].message.content;
+
   } catch (error) {
     console.error("GROQ ERROR:", error.response?.data || error.message);
     throw error;
