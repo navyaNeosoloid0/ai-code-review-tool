@@ -7,7 +7,7 @@ const app = express();
 // 🔥 IMPORTANT: allow your frontend domain
 app.use(
   cors({
-    origin: "https://ai-code-review-tool-sable.vercel.app",
+    origin: true,
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
   })
