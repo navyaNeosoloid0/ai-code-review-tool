@@ -8,16 +8,15 @@ const client = new OpenAI({
 });
 
 export const getAIReview = async (prompt) => {
-  try {
-    const res = await client.chat.completions.create({
-      model: "gpt-4.1-mini",
-      messages: [{ role: "user", content: prompt }],
-    });
+  const response = await client.chat.completions.create({
+    model: "gpt-4.1-mini",
+    messages: [
+      {
+        role: "user",
+        content: `Review this code and suggest improvements:\n\n${prompt}`,
+      },
+    ],
+  });
 
-    return res.choices[0].message.content;
-
-  } catch (error) {
-    console.error("🔥 OPENAI ERROR:", error);
-    throw error;
-  }
+  return response.choices[0].message.content;
 };

@@ -4,21 +4,23 @@ import reviewRoutes from "./routes/reviewRoutes.js";
 
 const app = express();
 
-// 🔥 FORCE headers manually (this ALWAYS works)
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://ai-code-review-tool-sable.vercel.app");
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  }
-
-  next();
-});
+// 🔥 IMPORTANT: allow your frontend domain
+app.use(
+  cors({
+    origin: "https://ai-code-review-tool-sable.vercel.app",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
 app.use(express.json());
 
+// ✅ Correct route
 app.use("/api/review", reviewRoutes);
+
+// optional health check
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
 
 export default app;
